@@ -1,0 +1,45 @@
+application:
+  version: "1.0.0"
+  title: "Whos Talk API"
+  secure_cookie: false
+spring:
+  profiles:
+    active: local
+
+--- #local configure
+server:
+  port: 9090
+  error:
+    path: /error
+    include-stacktrace: always
+    include-exception: true
+    whitelabel:
+      enabled: true
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  config:
+    activate:
+      on-profile: local
+  devtools:
+    restart:
+      enabled: false
+  datasource:
+    url: jdbc:mariadb://127.0.0.1:3306/wtdb
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    password: 1234
+  jpa:
+    open-in-view: false
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+mybatis:
+  type-aliases-package: com.patmat.whostalk.vo
+  mapper-locations: classpath:mappers/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: false

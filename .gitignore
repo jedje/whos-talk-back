@@ -1,0 +1,36 @@
+HELP.md
+.gradle
+target/
+build/
+**/src/main/**/WEB-INF/web.xml
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+!**/src/main/**/build/
+!**/src/test/**/build/
+*.pid
+.DS_Store
+
+#.classpath
+.factorypath
+#.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### VS Code ###
+.vscode/
+
+# type check
+node_modules/
