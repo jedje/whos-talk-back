@@ -9,6 +9,8 @@ spring:
 --- #local configure
 server:
   port: 9090
+  servlet:
+    context-path: /api
   error:
     path: /error
     include-stacktrace: always
@@ -27,10 +29,11 @@ spring:
     restart:
       enabled: false
   datasource:
-    url: jdbc:mariadb://127.0.0.1:3306/wtdb
-    driver-class-name: org.mariadb.jdbc.Driver
-    username: root
-    password: 1234
+    hikari:
+      driver-class-name: org.mariadb.jdbc.Driver
+      jdbc-url: jdbc:mariadb://127.0.0.1:3306/wtdb
+      username: root
+      password: 1234
   jpa:
     open-in-view: false
     generate-ddl: true
