@@ -1,0 +1,37 @@
+-- wtdb.user_data definition
+-- USER_DATE 1st
+CREATE TABLE `user_data` (
+  `USER_ID` varchar(100) NOT NULL COMMENT '유저 아이디',
+  `USER_PW` varchar(100) NOT NULL COMMENT '유저 비밀번호',
+  PRIMARY KEY (`USER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- wtdb.talk_list definition
+-- TALK_LIST 2nd
+CREATE TABLE `talk_list` (
+  `USER_ID` varchar(100) NOT NULL COMMENT '유저 아이디',
+  `TALK_ID` varchar(100) NOT NULL COMMENT '대화 아이디',
+  `FILE_NAME` text NOT NULL COMMENT '파일명',
+  `SAVE_DATE` varchar(100) NOT NULL COMMENT '저장날짜',
+  `CHAT_PARTNER` varchar(100) NOT NULL COMMENT '대화상대',
+  `INSERT_DATE` datetime NOT NULL COMMENT '입력 날짜',
+  PRIMARY KEY (`USER_ID`,`TALK_ID`),
+  UNIQUE KEY `talk_list_un` (`TALK_ID`),
+  CONSTRAINT `talk_list_FK` FOREIGN KEY (`USER_ID`) REFERENCES `user_data` (`USER_ID`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- wtdb.talk_contents definition
+-- TALK_CONTENTS 3rd
+CREATE TABLE `talk_contents` (
+  `TALK_ID` varchar(100) NOT NULL COMMENT '대화 아이디',
+  `CHAT_ROW` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '채팅행',
+  `CHAT_USER` varchar(100) NOT NULL COMMENT '채팅자',
+  `CHAT_TIME` varchar(100) NOT NULL COMMENT '채팅시간',
+  `CHAT_DATE` varchar(100) NOT NULL COMMENT '채팅일자',
+  `CHAT_CONTENTS` text DEFAULT NULL COMMENT '채팅내용',
+  PRIMARY KEY (`TALK_ID`,`CHAT_ROW`),
+  UNIQUE KEY `talk_contents_un` (`CHAT_ROW`),
+  CONSTRAINT `talk_contents_FK` FOREIGN KEY (`TALK_ID`) REFERENCES `talk_list` (`TALK_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
